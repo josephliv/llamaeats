@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'table', 'title' => 'Cruiser Travels Leadbox Management System', 'navName' => 'Table List', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'table', 'title' => 'Leadbox Management System', 'navName' => 'Table List', 'activeButton' => 'laravel'])
 
 @section('content')
 <head>

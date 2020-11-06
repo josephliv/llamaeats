@@ -1,4 +1,4 @@
-@extends('layouts/app', ['activePage' => 'login', 'title' => 'Cruiser Travels Leadbox Management System	'])
+@extends('layouts/app', ['activePage' => 'login', 'title' => 'Leadbox Management System	'])
 
 @section('content')
     <div class="full-page section-image" data-color="black" data-image="{{ asset('light-bootstrap/img/full-screen-image-2.jpg') }}">
