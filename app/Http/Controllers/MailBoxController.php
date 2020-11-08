@@ -230,9 +230,15 @@ class MailBoxController extends Controller
             $dateTo     = \Carbon\Carbon::parse($request->input('to-date'))->endOfDay();
         }
 
+        DB::enableQueryLog();
         $leadMails = LeadMails::where('updated_at', '>=', $dateFrom)
                         ->where('updated_at', '<=', $dateTo)
                         ->orderBy('id', 'desc')->get();
+
+        $query = DB::getQueryLog();
+        $query = end($query);
+        dd($query);
+
         return view('pages.emailsmanage', compact('leadMails', 'dateFrom', 'dateTo'));
 
     }
