@@ -272,7 +272,7 @@ class MailBoxController extends Controller
                         ->whereNull('old_agent_id')
                         ->orderBy('id', 'desc')
                         //->get();
-                        ->paginate(200);
+                        ->paginate(50);
 
         //$query = \DB::getQueryLog();
         //$query = end($query);
