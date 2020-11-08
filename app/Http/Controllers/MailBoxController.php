@@ -243,6 +243,113 @@ class MailBoxController extends Controller
 
     }
 
+    public function getAssignedLeads(Request $request){
+
+        if(!count($request->input())){
+
+            $leadMails = LeadMails::orderBy('id', 'asc')
+                ->limit(1)
+                ->get()
+                ->first();
+
+            if($leadMails){
+                $dateFrom   = \Carbon\Carbon::parse($leadMails->created_at)->startOfDay();
+            } else {
+                $dateFrom   = \Carbon\Carbon::now()->startOfDay();
+            }
+            
+            $dateTo     = \Carbon\Carbon::now()->endOfDay();
+        } else {
+            $dateFrom   = \Carbon\Carbon::parse($request->input('from-date'))->startOfDay();
+            $dateTo     = \Carbon\Carbon::parse($request->input('to-date'))->endOfDay();
+        }
+
+        //\DB::enableQueryLog();
+        $leadMails = LeadMails::where('updated_at', '>=', $dateFrom)
+                        ->where('updated_at', '<=', $dateTo)
+                        ->where('agent_id', '>', 0)
+                        ->orderBy('id', 'desc')->get();
+
+        /*$query = \DB::getQueryLog();
+        $query = end($query);
+        dd($query);*/
+
+        return view('pages.emailsmanage', compact('leadMails', 'dateFrom', 'dateTo'));
+
+    }
+
+    public function getRejectedLeads(Request $request){
+
+        if(!count($request->input())){
+
+            $leadMails = LeadMails::orderBy('id', 'asc')
+                ->limit(1)
+                ->get()
+                ->first();
+
+            if($leadMails){
+                $dateFrom   = \Carbon\Carbon::parse($leadMails->created_at)->startOfDay();
+            } else {
+                $dateFrom   = \Carbon\Carbon::now()->startOfDay();
+            }
+            
+            $dateTo     = \Carbon\Carbon::now()->endOfDay();
+        } else {
+            $dateFrom   = \Carbon\Carbon::parse($request->input('from-date'))->startOfDay();
+            $dateTo     = \Carbon\Carbon::parse($request->input('to-date'))->endOfDay();
+        }
+
+        //\DB::enableQueryLog();
+        $leadMails = LeadMails::where('updated_at', '>=', $dateFrom)
+                        ->where('updated_at', '<=', $dateTo)
+                        ->where('rejected', '<>', 0)
+                        ->orderBy('id', 'desc')->get();
+
+        /*$query = \DB::getQueryLog();
+        $query = end($query);
+        dd($query);*/
+
+        return view('pages.emailsmanage', compact('leadMails', 'dateFrom', 'dateTo'));
+
+    }
+
+    public function getReassignedLeads(Request $request){
+
+        if(!count($request->input())){
+
+            $leadMails = LeadMails::orderBy('id', 'asc')
+                ->limit(1)
+                ->get()
+                ->first();
+
+            if($leadMails){
+                $dateFrom   = \Carbon\Carbon::parse($leadMails->created_at)->startOfDay();
+            } else {
+                $dateFrom   = \Carbon\Carbon::now()->startOfDay();
+            }
+            
+            $dateTo     = \Carbon\Carbon::now()->endOfDay();
+        } else {
+            $dateFrom   = \Carbon\Carbon::parse($request->input('from-date'))->startOfDay();
+            $dateTo     = \Carbon\Carbon::parse($request->input('to-date'))->endOfDay();
+        }
+
+        //\DB::enableQueryLog();
+        $leadMails = LeadMails::where('updated_at', '>=', $dateFrom)
+                        ->where('updated_at', '<=', $dateTo)
+                        ->where('old_agent_id', '<>', 0)
+                        ->where('rejected', '<>', 0)
+                        ->orderBy('id', 'desc')
+                        ->get();
+
+        /*$query = \DB::getQueryLog();
+        $query = end($query);
+        dd($query);*/
+
+        return view('pages.emailsmanage', compact('leadMails', 'dateFrom', 'dateTo'));
+
+    }
+
     public function sendLeads(Request $request){
 
         $user = \Auth::user();
