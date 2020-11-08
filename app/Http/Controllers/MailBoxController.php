@@ -269,7 +269,7 @@ class MailBoxController extends Controller
                         ->where('updated_at', '<=', $dateTo)
                         ->where('agent_id', '>', 0)
                         ->where('rejected', '=', 0)
-                        ->where('old_agent_id', '=', 0)
+                        ->whereNull('old_agent_id')
                         ->orderBy('id', 'desc')
                         //->get();
                         ->paginate(200);
