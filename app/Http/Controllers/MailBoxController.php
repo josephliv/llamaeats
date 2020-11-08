@@ -268,6 +268,7 @@ class MailBoxController extends Controller
         $leadMails = LeadMails::where('updated_at', '>=', $dateFrom)
                         ->where('updated_at', '<=', $dateTo)
                         ->where('agent_id', '>', 0)
+                        ->where('rejected', '=', 0)
                         ->orderBy('id', 'desc')
                         //->get();
                         ->paginate(200);
