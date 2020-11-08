@@ -33,11 +33,19 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::patch('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::patch('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+	
 	Route::get('emails', ['as' => 'emails.manage', 'uses' => 'MailBoxController@manage']);
-	Route::get('getAssigned', ['as' => 'emails.manage', 'uses' => 'MailBoxController@getAssignedLeads']);
-	Route::get('getRejected', ['as' => 'emails.manage', 'uses' => 'MailBoxController@getRejectedLeads']);
-	Route::get('getReassigned', ['as' => 'emails.manage', 'uses' => 'MailBoxController@getReassignedLeads']);
 	Route::post('emails', ['as' => 'emails.manage2', 'uses' => 'MailBoxController@manage']);
+
+	Route::get('getAssigned', ['as' => 'emails.getAssigned', 'uses' => 'MailBoxController@getAssignedLeads']);
+	Route::post('getAssigned', ['as' => 'emails.getAssigned', 'uses' => 'MailBoxController@getAssignedLeads']);
+
+	Route::get('getRejected', ['as' => 'emails.getRejected', 'uses' => 'MailBoxController@getRejectedLeads']);
+	Route::post('getRejected', ['as' => 'emails.getRejected', 'uses' => 'MailBoxController@getRejectedLeads']);
+	
+	Route::get('getReassigned', ['as' => 'emails.getReassigned', 'uses' => 'MailBoxController@getReassignedLeads']);
+	Route::post('getReassigned', ['as' => 'emails.getReassigned', 'uses' => 'MailBoxController@getReassignedLeads']);
+	
 	Route::get('reademail', 'MailBoxController@index');
 	Route::get('leads/get', 'MailBoxController@sendLeads');
 	Route::get('{page}', ['as' => 'page.index', 'uses' => 'PageController@index']);
