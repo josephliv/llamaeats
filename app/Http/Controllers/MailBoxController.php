@@ -269,7 +269,8 @@ class MailBoxController extends Controller
                         ->where('updated_at', '<=', $dateTo)
                         ->where('agent_id', '>', 0)
                         ->orderBy('id', 'desc')
-                        ->get();
+                        //->get();
+                        ->paginate(200);
 
         //$query = \DB::getQueryLog();
         //$query = end($query);
