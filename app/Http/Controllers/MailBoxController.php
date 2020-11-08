@@ -131,7 +131,7 @@ class MailBoxController extends Controller
                     $lead->body             = $body;
                     $lead->attachment       = $filename;
                     $lead->received_date    = $oMessage->date;
-                    $lead->priority         = 100;
+                    $lead->priority         = 50;
                     $lead->save();
 
                     foreach(Priority::all() as $priority){
