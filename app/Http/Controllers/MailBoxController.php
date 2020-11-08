@@ -245,7 +245,7 @@ class MailBoxController extends Controller
 
     public function getAssignedLeads(Request $request){
 
-        if($request->input('from-date') && $request->input('to-date')){
+        if(!$request->input('from-date') && !$request->input('to-date')){
 
             $leadMails = LeadMails::orderBy('id', 'asc')
                 ->limit(1)
