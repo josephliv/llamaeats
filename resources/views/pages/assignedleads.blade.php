@@ -70,20 +70,11 @@
                                         <tr>
                                             <td><span id="mail-from">{{$leadMail->id}}</span></td>
                                             <td><span id="mail-from">{{$leadMail->email_from}}</span></td>
-                                            <td></td>
+                                            <td>{{$leadMail->subject}}</td>
                                             <td >{{optional(optional($leadMail->agent())->first())->name}}</td>
                                             
                                             <td><span id="mail-date">{{\Carbon\Carbon::parse($leadMail->received_date)->format('m/d/Y g:i A')}}</span> </td>
-                                            <td class="d-flex justify-content-end">
-                                                        @if($leadMail->attachment)
-                                                            <a href="{{route('leads.download', $leadMail->id)}}" target="_blank" class="btn btn-link btn-warning edit d-inline-block" title="Attachment available."><i class="fa fa-paperclip"></i></a>
-                                                        @else
-                                                            <a href="#" target="_blank" class="btn disabled btn-link btn-warning edit d-inline-block"><i class="fa fa-paperclip"></i></a>
-                                                        @endif
-                                                        <a data-toggle="modal" data-id="{{$leadMail->id}}" data-type="body" data-target="#leadsModal" class="btn btn-link btn-warning getbody d-inline-block"><i class="fa fa-file" title="Read full email."></i></a>
-
-                                                        <a class="btn btn-link btn-danger " onclick="confirm('{{ __('Are you sure you want to delete this Lead?') }}') ? window.location.href='{{ route('leads.destroy', $leadMail->id) }}' : ''"s><i class="fa fa-times" title="Delete."></i></a>
-                                                </td>
+                                            
                                         </tr>
                                         @endif
                                     @endforeach
